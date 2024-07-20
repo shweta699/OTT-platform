@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Recommended Movies</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <img src="{{ movie.image_url }}" alt="{{ movie.title }}" style="width: 200px; height: auto;">
+                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">{{ movie.title }}</a>
+                - Rating: {{ movie.rating }} ({{ movie.review_count }} reviews)
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

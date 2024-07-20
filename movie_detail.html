@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+    <p>{{ movie.description }}</p>
+    <iframe width="560" height="315" src="{{ movie.youtube_url }}" frameborder="0" allowfullscreen></iframe>
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>Rating: {{ review.rating }} - {{ review.comment }}</li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('add_review', movie_id=movie.id) }}" method="post">
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment"></textarea>
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>
